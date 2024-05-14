@@ -30,6 +30,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // # 1 build value
+  bool? isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,18 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Placeholder(),
+      body: Center(
+        child: Checkbox(
+          // # 2 integrate value
+          value: isChecked,
+          // # 3 change state
+          onChanged: (bool? value) {
+            setState(() {
+              isChecked = value!;
+            });
+          },
+        ),
+      ),
     );
   }
 }
