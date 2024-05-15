@@ -31,26 +31,31 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // # 1 build value
-  bool? isChecked = false;
+  bool erased = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Checkbox(
-          // # 2 integrate value
-          value: isChecked,
-          // # 3 change state
-          onChanged: (bool? value) {
-            setState(() {
-              isChecked = value!;
-            });
-          },
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
         ),
-      ),
-    );
+        body: Center(
+          child: erased
+              ? Container(
+                  height: 50,
+                  width: 50,
+                  color: Colors.orange[600],
+                )
+              : Chip(
+                  label: Text('chip'),
+                  avatar: CircleAvatar(
+                    backgroundColor: Colors.blue[300],
+                  ),
+                  onDeleted: () {
+                    setState(() {
+                      erased = true;
+                    });
+                  }),
+        ));
   }
 }
